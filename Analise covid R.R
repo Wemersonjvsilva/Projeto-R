@@ -1,98 +1,95 @@
+'---
+title: "Analises de dados das Variantes da Covid"
+author: "Cleyton Junior da Silva Cardoso e Wemerson Jose Vieira da Silva"
+output: html_document'
 ---
-title: "Analise Variantes Covid 19"
-author: "Cleyton Junior da Silva Cardoso e Wemerson José Vieira da Silva"
-date: "`r Sys.Date()`"
-output:
-  prettydoc::html_pretty:
-  theme: cayman
-  highlight: github
----
-# Análise de dados das variantes da Covid 19 relacionado a país
+  # Analise de dados das variantes da Covid 19 relacionado aos pa�ses
+  
+'Os Dados extraidos do Kaggle atraves do  link: https://www.kaggle.com/yamqwe/omicron-covid19-variant-daily-cases' 
 
-Os Dados extraídos do Kaggle através do  link: https://www.kaggle.com/yamqwe/omicron-covid19-variant-daily-cases 
-
-O arquivo possui dados sobre os casos diário das variantes da covid 19 e seus respectivos países 
-e possui 100.416 linhas e 6 colunas.
+'O arquivo possui dados sobre os casos diario das variantes da covid 19 e seus respectivos pa�ses 
+e possui 100.416 linhas e 6 colunas.'
 
 ### carregando os pacotes:
 
-```{r}
+'```{r}'
 require(ggplot2)
 require(DescTools)
 require(datasets)
 require(dplyr)
-```
+'```'
 
 ### Lendo o arquivo base de dados e Analisando a estrutura da tabela:
 
-```{r}
+'```{r}'
 cepas <- read.csv("D:/OneDrive/Documentos/GitHub/Projeto-R/covid-variants.csv")
 head(cepas)
 summary(cepas)
-```
+'```'
 
 ### Atribuindo a um data frame e lendo as primeiras linhas:
 
-```{r}
+'```{r}'
 variantesCovid <- as.data.frame(cepas)
 typeof(variantesCovid)
 head(variantesCovid)
 
-```
+'```'
 
-### Renomeando o cabeçalho das colunas:
+### Renomeando o cabe�alho das colunas:
 
-```{r}
+'```{r}'
+
+'```'
+'```{r}'
 names(variantesCovid) <- c("Pais", "Data", "Variante", "NumeroCasos", "PercentualCasos", "TotalCasos")
 head(variantesCovid)
-```
+'```'
 
 ### Filtrando apenas as linhas com valores:
 
-```{r}
+'```{r}'
 variantesCovid <- variantesCovid %>% 
   filter(NumeroCasos != 0)
-```
+'```'
 
 ### Filtrando apenas as variantes mais conhecidas:
 
-```{r}
+'```{r}'
 variant_filt <- variantesCovid %>% 
   filter(Variante == "Alpha" | Variante == "Delta" | Variante == "Beta" | Variante == "Gamma" | Variante == "Omicron")
-```
+'```'
 
 ### Plotando grafico para saber quais as variantes com mais casos:
 
-```{r}
+'```{r}'
 ggplot(variant_filt,aes(Variante)) +
   geom_bar() +
   ylab("Quantidade") +
   xlab("Variante")
-```
+'```'
 
 ### filtrando apenas a variante  Omicron:
 
-```{r}
+'```{r}'
 variant_omicron <- variantesCovid %>% 
   filter(Variante == "Omicron")
-```
+'```'
 
-### Verificando em como os casos de Omicron estão distribuídos por data:
+### Verificando em como os casos de Omicron est�o distribuidos por data:
 
-```{r}
+'```{r}'
 ggplot(variant_omicron, aes(x= Data, y=NumeroCasos)) +
   geom_point() +
   xlab("") +
   ylab("Casos")
-```
+'```'
 
 ### Verificando as datas que possuem mais casos da variante Omicron:
 
-```{r}
+'```{r}'
 ggplot(variant_omicron,aes(Data)) +
   geom_bar() +
   ylab("Quantidade") +
   xlab("Datas")
-```
-
-
+'```'
