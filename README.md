@@ -1,12 +1,6 @@
 ---
 title: "Analise Variantes Covid 19"
 author: "Cleyton Junior da Silva Cardoso e Wemerson José Vieira da Silva"
-date: "`r Sys.Date()`"
-output_dir: "."
-output:
-  prettydoc::html_pretty:
-    theme: cayman
-    highlight: github
 ---
 # Análise de dados das variantes da Covid 19 relacionado a país
 
